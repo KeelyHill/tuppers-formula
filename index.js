@@ -6,8 +6,8 @@ var src = $('#grid');
 var wrap = $('<div id="grid-overlay"></div>');
 var gsize = 10;
 
-var cols = 1; // 50
-var rows = 3; // 30 looks nice
+var cols = 106; // 50
+var rows = 17; // 30 looks nice
 var gridArea = (cols + 1) * (rows + 1);
 
 // create overlay
@@ -57,13 +57,8 @@ var setBitMap = function() {
         for (var y = 0; y <= rows; y++) {
             var tr = $("#tr" + y);
             var td = tr.find("#td" + x);
-            // td.addClass('unselected');
-
-            // console.log(bitString[i]);
 
             var bit = bitString[i];
-
-            console.log(td);
 
             if (bit == "0" || !bit) {
                 td.addClass('unselected');
@@ -115,7 +110,7 @@ var bitError = $('#bitError');
 var decError = $('#decError');
 
 $('#bitArea').keyup(function() {
-    input = $(this).val().replace(' ', '');
+    input = $(this).val().replace(/ /g, '').replace(',', '');
 
     if(!/^[0-1]*$/.test(input) && input != "") bitError.text("Not a binary number.");
     else if (input != "") {
@@ -128,13 +123,15 @@ $('#bitArea').keyup(function() {
 });
 
 $('#decArea').keyup(function() {
-    input = $(this).val().replace(' ', '');
+    input = $(this).val().replace(/ /g, '').replace(',', '');
+
+    bigInput = new BigNumber(input);
 
     if(!/^\d+$/.test(input) && input != "") decError.text("Not a positive number.");
     else {
         decError.text("");
         decimal = input;
-        setBitString((+input).toString(2));
+        setBitString(bigInput.toString(2));
         setBitMap();
     }
 });

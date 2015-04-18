@@ -14,12 +14,12 @@ body {
     }
 }
 
-@media (min-width: 1300px) {
+/*@media (min-width: 1300px) {
     body {
         max-width:50%;
     }
 }
-
+*/
 body * {
     font-family:"Lucida Console", Monaco, monospace;
     line-height:1.2;
