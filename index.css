@@ -56,9 +56,9 @@ textarea {
     display: inline-block;
 }
 
-.presets {
-    font-size: 1.5rem;
-    margin: 0.5em;
+#presets * {
+    font-size: 0.8em;
+    margin: 0.3em;
 }
 
 .hover {
