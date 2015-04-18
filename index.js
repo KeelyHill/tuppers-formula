@@ -48,10 +48,10 @@ var setBitMap = function() {
 
 var getDecimalFromMap = function () {
     var bitString = "";
-    for (var y = 0; y < cols; y++) {
-        for (var x = 0; x < rows; x++) {
+    for (var y = 0; y <= cols; y++) {
+        for (var x = 0; x <= rows; x++) {
 
-            var boolBit = $("table #tr" + y + " #td" + x).hasClass('selected') ? 1 : 0;
+            var boolBit = $("table #tr" + x + " #td" + y).hasClass('selected') ? 1 : 0;
 
             bitString += boolBit;
         }

@@ -2,11 +2,17 @@ body {
     font-family:"Lucida Console", Monaco, monospace;
     background: #ddd;
     margin:40px auto;
-    max-width:650px;
+    max-width:75%;
     line-height:1.6;
     font-size:18px;
-    color:#444;
+    color:#333;
     padding:0 10px;
+}
+
+body * {
+    font-family:"Lucida Console", Monaco, monospace;
+    line-height:1.2;
+    color:#333;
 }
 
 h1,h2,h3{line-height:1.2;}
