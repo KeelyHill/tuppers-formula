@@ -2,7 +2,6 @@ $(function () {
     
 });
 
-
 var src = $('#grid');
 var wrap = $('<div id="grid-overlay"></div>');
 var gsize = 10;
@@ -35,7 +34,7 @@ var decimal = BigNumber;
 
 var setBitString = function(string) {
     bitString = string;
-    $("#bitArea").text(bitString);
+    $("#bitArea").val(bitString);
 }
 
 var setDecString = function(bigNum) {
@@ -47,7 +46,7 @@ var setDecString = function(bigNum) {
         decString = decimal.toFormat(3).slice(0, -4)
     }
 
-    $("#decArea").text(decString);
+    $("#decArea").val(decString);
 }
 
 var setBitMap = function() {
@@ -82,6 +81,31 @@ $('#grid-overlay td').mouseup(function () {
 
 $('#grid-overlay td').mousedown(function () {
     $(this).toggleClass('selected').toggleClass('unselected');
+});
+
+var bitError = $('#bitError');
+var decError = $('#decError');
+
+$('#bitArea').keyup(function() {
+    input = $(this).val();
+
+    if(!/^[0-1]*$/.test(input) && input != "") bitError.text("Not a binary number.");
+    else {
+        bitError.text("");
+        setDecString(new BigNumber(input, 2));
+        setBitMap();
+    } 
+});
+
+$('#decArea').keyup(function() {
+    input = $(this).val();
+
+    if(!/^\d+$/.test(input) && input != "") decError.text("Not a positive number.");
+    else {
+        decError.text("");
+        setBitString((+input).toString(2));
+        setBitMap();
+    }
 });
 
 $("#showCommas").click(function() {
