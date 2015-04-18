@@ -21,6 +21,10 @@ h1,h2,h3{line-height:1.2;}
     text-align: center;
 }
 
+table {
+    border-spacing: 1px;
+}
+
 textarea {
     font-size: 1rem;
     width: 100%;
