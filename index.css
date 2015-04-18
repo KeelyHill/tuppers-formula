@@ -5,8 +5,19 @@ body {
     max-width:75%;
     line-height:1.6;
     font-size:18px;
-    color:#333;
     padding:0 10px;
+}
+
+@media (max-width: 800px) {
+    body {
+        max-width:97%;
+    }
+}
+
+@media (min-width: 1300px) {
+    body {
+        max-width:50%;
+    }
 }
 
 body * {
