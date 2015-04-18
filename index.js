@@ -39,8 +39,15 @@ var setBitString = function(string) {
 }
 
 var setDecString = function(bigNum) {
-    decString = bigNum;
-    $("#decArea").text(decString.toFormat(3).slice(0, -4));
+    decimal = bigNum;
+
+    var decString = decimal.toFixed();
+
+    if ($("#showCommas")[0].checked) {
+        decString = decimal.toFormat(3).slice(0, -4)
+    }
+
+    $("#decArea").text(decString);
 }
 
 var setBitMap = function() {
@@ -75,4 +82,14 @@ $('#grid-overlay td').mouseup(function () {
 
 $('#grid-overlay td').mousedown(function () {
     $(this).toggleClass('selected').toggleClass('unselected');
+});
+
+$("#showCommas").click(function() {
+     var decString = decimal.toFixed();
+
+    if (this.checked) {
+        decString = decimal.toFormat(3).slice(0, -4)
+    }
+
+    $("#decArea").text(decString);
 });
