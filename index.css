@@ -56,6 +56,11 @@ textarea {
     display: inline-block;
 }
 
+.presets {
+    font-size: 1.5rem;
+    margin: 0.5em;
+}
+
 .hover {
     background-color: rgba(0, 0, 0, 0.5) !important;
 }
