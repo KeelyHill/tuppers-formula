@@ -125,12 +125,12 @@ $('#bitArea').keyup(function() {
 $('#decArea').keyup(function() {
     input = $(this).val().replace(/ /g, '').replace(',', '');
 
-    bigInput = new BigNumber(input);
 
     if(!/^\d+$/.test(input) && input != "") decError.text("Not a positive number.");
-    else {
+    else if (input != "") {
+        bigInput = new BigNumber(input);
         decError.text("");
-        decimal = input;
+        decimal = bigInput;
         setBitString(bigInput.toString(2));
         setBitMap();
     }
@@ -139,9 +139,10 @@ $('#decArea').keyup(function() {
 $("#showCommas").click(function() {
    var decString = decimal.toFixed();
 
-   if (this.checked) {
-    decString = decimal.toFormat(3).slice(0, -4)
-}
+    if (this.checked) {
+        decString = decimal.toFormat(3).slice(0, -4);
 
-$("#decArea").text(decString);
+    }
+
+    $("#decArea").val(decString);
 });
