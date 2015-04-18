@@ -4,10 +4,10 @@ $(function () {
 
 var src = $('#grid');
 var wrap = $('<div id="grid-overlay"></div>');
-var gsize = 10;
+var gsize = 7;
 
-var cols = 106; // 50
-var rows = 17; // 30 looks nice
+var cols = 105; // 50
+var rows = 16; // 30 looks nice
 var gridArea = (cols + 1) * (rows + 1);
 
 // create overlay
@@ -89,7 +89,7 @@ var getDecimalFromMap = function () {
     var decimal = new BigNumber(bitString, 2)
 
     setBitString(bitString);
-    setDecString(decimal);
+    setDecString(decimal.times(17));
 
     // $("#debug").append(decimal + " from " + bitString + "<br>");
 }
@@ -117,7 +117,7 @@ $('#bitArea').keyup(function() {
         bitError.text("");
         // setBitString(input);
         bitString = input;
-        setDecString(new BigNumber(input, 2));
+        setDecString(new BigNumber(input, 2).times(17));
         setBitMap();
     } 
 });
@@ -131,7 +131,7 @@ $('#decArea').keyup(function() {
         bigInput = new BigNumber(input);
         decError.text("");
         decimal = bigInput;
-        setBitString(bigInput.toString(2));
+        setBitString(bigInput.dividedBy(17).floor().toString(2));
         setBitMap();
     }
 });
