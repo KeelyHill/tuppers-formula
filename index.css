@@ -1,4 +1,4 @@
-body{
+body {
     font-family:"Lucida Console", Monaco, monospace;
     background: #ddd;
     margin:40px auto;
@@ -11,3 +11,36 @@ body{
 
 h1,h2,h3{line-height:1.2;}
 
+.title {
+    text-align: center;
+}
+
+textarea {
+    font-size: 1rem;
+    width: 100%;
+    height: 150px;
+}
+
+#grid {
+    position: absolute;
+ /*   width: 100%;
+    height: 100%;*/
+    /*display: inline-block;*/
+    display: block;
+}
+
+#grid-overlay {
+    position: relative;
+    border: 2px solid black;
+    display: inline-block;
+}
+
+.hover {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.unselected {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.selected {
+    background-color: black;
+}
