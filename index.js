@@ -2,6 +2,7 @@ $(function () {
     
 });
 
+
 var src = $('#grid');
 var wrap = $('<div id="grid-overlay"></div>');
 var gsize = 10;
@@ -30,16 +31,16 @@ wrap.append(tbl);
 src.after(wrap);
 
 var bitString = "";
-var decString = "";
+var decimal = BigNumber;
 
 var setBitString = function(string) {
     bitString = string;
     $("#bitArea").text(bitString);
 }
 
-var setDecString = function(string) {
-    decString = string;
-    $("#decArea").text(decString);
+var setDecString = function(bigNum) {
+    decString = bigNum;
+    $("#decArea").text(decString.toFormat(3).slice(0, -4));
 }
 
 var setBitMap = function() {
@@ -56,7 +57,7 @@ var getDecimalFromMap = function () {
             bitString += boolBit;
         }
     }
-    var decimal = parseInt(bitString, 2);
+    var decimal = new BigNumber(bitString, 2)
 
     setBitString(bitString);
     setDecString(decimal);
