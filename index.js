@@ -156,3 +156,34 @@ $("#presets button").click(function() {
     setBitMap();
 });
 
+
+$("#presets #netpbm").change(function(evt) {
+    var input = evt.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+        try {
+            var image = NetPBM.load(e.target.result);
+            var canvas = image.getCanvas().getContext("2d");
+            var data = canvas.getImageData(0, 0, cols + 1, rows + 1).data;
+
+            var bitString = "";
+            for (var x = 0; x <= cols ; x++) {
+                var offsetX = 4*x;
+                for (var y = rows; y >= 0; y--) {
+                    var offsetY = (cols + 1) * (y) * 4;
+                    bitString += data[offsetY + offsetX] != 0 ? "0" : "1";
+                }
+            };
+            bitError.text("");
+            setBitString(bitString);
+
+            decError.text("");
+            setDecString(new BigNumber(bitString, 2).times(17));
+
+            setBitMap();
+        } catch (ex) {
+            alert(ex.message);
+        }
+    }
+    reader.readAsBinaryString(input);
+});

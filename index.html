@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="index.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" defer></script>
     <script src="bignumber.min.js" defer></script>
+    <script src="netpbm-parser/netpbm-parser.js" defer></script>
     <script src="index.js" defer></script>
 </head>
 <body>
@@ -17,7 +18,8 @@
     <p>
         -Choose a preset.<br>
         -Click a square to select it, again to unselect it; now draw!<br>
-        -Paste in some binary or a <i>k</i> value.
+        -Paste in some binary or a <i>k</i> value.<br />
+        -Load NetPBM image (will be cropped to 106x17)
     </p>
 
     <div id="presets">
@@ -37,6 +39,8 @@
 
          <button p=27 dec="31676462182035904167382730637745660496821033557314261927673145874277365684549908791631563256301291403627022236585389075297107770018709009604140744560295332219328412846192335737585534173045138944045342037488033070816028037533033908615956221155941280772447766282077931800148303200569152250489287033692816107411303226251533257048494649388597174348727302405734678024871707166618350416397157404279761789198857873050255177819330468977383129836855432915992135859240149852517492834553991122367693049424097126581429917736026567104582275370582016">
         Sick App</button>
+
+        PBM image: <input type="file" id="netpbm" name="file" />
     </div>
 
     <div id="grid"></div>

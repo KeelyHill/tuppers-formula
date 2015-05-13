@@ -1,0 +1,3 @@
+[submodule "netpbm-parser"]
+	path = netpbm-parser
+	url = https://github.com/RobSis/netpbm-parser
