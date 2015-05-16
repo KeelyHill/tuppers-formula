@@ -32,7 +32,7 @@ var decimal = BigNumber;
 
 var setBitString = function(string) {
     if (string.length > gridArea) bitError.text("Thats too big!"); else bitError.text("");
-    bitString = string;
+    bitString = string.replace(/0+$/g, "");
     $("#bitArea").val(bitString);
 }
 
@@ -64,7 +64,7 @@ var setBitMap = function() {
             if (bit == "1") {
                 td.addClass('selected');
                 td.removeClass('unselected');                
-	    }
+            }
             i++;
         }
     }
@@ -109,7 +109,7 @@ $('#bitArea').keyup(function() {
     else if (input != "") {
         bitError.text("");
         // setBitString(input);
-        bitString = input;
+        setBitString(input);
         setDecString(new BigNumber(input, 2).times(17));
         setBitMap();
     } 
@@ -129,13 +129,13 @@ $('#decArea').keyup(function() {
 });
 
 $("#showCommas").click(function() {
-   var decString = decimal.toFixed();
+ var decString = decimal.toFixed();
 
-    if (this.checked) {
-        decString = decimal.toFormat(3).slice(0, -4);
-    }
+ if (this.checked) {
+    decString = decimal.toFormat(3).slice(0, -4);
+}
 
-    $("#decArea").val(decString);
+$("#decArea").val(decString);
 });
 
 String.prototype.repeat = function(num) {
