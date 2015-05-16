@@ -41,11 +41,17 @@ var setDecString = function(bigNum) {
 
     var decString = decimal.toFixed();
 
+    convertToWords(decString);
+
     if ($("#showCommas")[0].checked) {
         decString = decimal.toFormat(3).slice(0, -4)
     }
 
     $("#decArea").val(decString);
+}
+
+var convertToWords = function(decString) {
+    $('#wordsArea').text(toWordsConverted(decString));
 }
 
 var setBitMap = function() {
@@ -108,7 +114,6 @@ $('#bitArea').keyup(function() {
     if(!/^[0-1]*$/.test(input) && input != "") bitError.text("Not a binary number.");
     else if (input != "") {
         bitError.text("");
-        // setBitString(input);
         setBitString(input);
         setDecString(new BigNumber(input, 2).times(17));
         setBitMap();
@@ -122,17 +127,17 @@ $('#decArea').keyup(function() {
     else if (input != "") {
         bigInput = new BigNumber(input);
         decError.text("");
-        decimal = bigInput;
         setBitString(bigInput.dividedBy(17).floor().toString(2));
+        setDecString(bigInput);
         setBitMap();
     }
 });
 
 $("#showCommas").click(function() {
- var decString = decimal.toFixed();
+    var decString = decimal.toFixed();
 
- if (this.checked) {
-    decString = decimal.toFormat(3).slice(0, -4);
+    if (this.checked) {
+        decString = decimal.toFormat(3).slice(0, -4);
 }
 
 $("#decArea").val(decString);

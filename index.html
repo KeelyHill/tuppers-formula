@@ -14,6 +14,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" defer></script>
     <script src="bignumber.min.js" defer></script>
     <script src="netpbm-parser/netpbm-parser.js" defer></script>
+    <script src="numtowords.js" defer></script>
     <script src="index.js" defer></script>
 </head>
 <body>
@@ -59,6 +60,9 @@
     Decimal(<i>k</i>) <small><input type="checkbox" checked id="showCommas"/>Show Commas</small>
     <span id="decError" class="error"></span>
     <textarea id="decArea" placeholder="The k Decimal"></textarea>
+
+    Words <small>(Only works with numbers less than 303 digits due to limitations in the English language)</small>
+    <textarea id="wordsArea" placeholder="Number as words" readonly></textarea>
 
     <br>
     <footer>If you're a designer and want to make this look better, send a pull request on <a href="https://github.com/KeelyHill/tuppers-formula">GitHub</a>.<br><br>
