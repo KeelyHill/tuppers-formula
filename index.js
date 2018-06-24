@@ -1,6 +1,7 @@
 var src = $('#grid');
 var wrap = $('<div id="grid-overlay"></div>');
 var gsize = 7;
+var grid = 1802;
 
 // these are 1 less due to counting from 0
 var cols = 105; // does not really matter
@@ -127,7 +128,7 @@ $('#decArea').keyup(function() {
     else if (input != "") {
         bigInput = new BigNumber(input);
         decError.text("");
-        setBitString(bigInput.dividedBy(17).floor().toString(2));
+        setBitString(bigInput.dividedBy(17).floor().toString(2).padStart(1802, 0));
         setDecString(bigInput);
         setBitMap();
     }
