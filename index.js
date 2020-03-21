@@ -216,7 +216,12 @@ function setPresetUrl() {
     const url = new URL(document.location);
     const params = url.searchParams;
     BigNumber.config({ ALPHABET: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' });
-    params.set('preset', decimal.dividedBy(17).toString(62));
+    const base62String = decimal.dividedBy(17).toString(62);
+    if (base62String !== '0') {
+        params.set('preset', base62String);
+    } else {
+        params.delete('preset');
+    }
     window.history.replaceState({}, document.title, url.href);
 }
 
