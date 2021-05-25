@@ -8,13 +8,16 @@ var cols = 105; // does not really matter
 var rows = 16; // matters alot.
 var gridArea = (cols + 1) * (rows + 1);
 
+var tmpRow;
+var tmpCol;
+
 /* Overlay */
 
-var tbl = $('<table></table>');
+var tbl = $('<table onmousedown="return false;"></table>');
 for (var y = rows; y >= 0; y--) {
     var tr = $("<tr id='tr" + y + "'></tr>");
     for (var x = 0; x <= cols; x++) {
-        var td = $("<td id='td" + x + "'></td>");
+        var td = $("<td id='td" + x + "' rel-row='" + y + "' rel-col='" + x + "'></td>");
         td.css('width', gsize + 'px').css('height', gsize + 'px');
         td.addClass('unselected');
         tr.append(td);
@@ -99,11 +102,19 @@ $('#grid-overlay td').hover(function () {
 });
 
 $('#grid-overlay td').mouseup(function () {
+    let localRow = $(this).attr('rel-row');
+    let localCol = $(this).attr('rel-col');
+    for (let i = Math.min(tmpRow, localRow); i <= Math.max(tmpRow, localRow); i++) {
+        for (let j = Math.min(tmpCol, localCol); j <= Math.max(tmpCol, localCol); j++) {
+            $('#tr' + i + ' #td' + j).toggleClass('selected').toggleClass('unselected');
+        }
+    }
     getDecimalFromMap();
 });
 
 $('#grid-overlay td').mousedown(function () {
-    $(this).toggleClass('selected').toggleClass('unselected');
+    tmpRow = $(this).attr('rel-row');
+    tmpCol = $(this).attr('rel-col');
 });
 
 var bitError = $('#bitError');
