@@ -65,7 +65,7 @@ function fixChars() {
 
 // returns the value
 function toWordsConverted(string) {
-   // fixChars();
+    // fixChars();
     var s = string
     // if (s.length > 315) {
     //     alert("Your number is " + s.length + " digits long.\nThe maximum length is 303  digits.");
