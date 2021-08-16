@@ -93,6 +93,7 @@ var getDecimalFromMap = function () {
 
     setBitString(bitString);
     setDecString(decimal.times(17));
+    setPresetUrl();
 }
 
 /* Events */
@@ -127,8 +128,9 @@ $('#bitArea').keyup(function() {
     else if (input != "") {
         bitError.text("");
         setBitString(input);
-        setDecString(new BigNumber(input, 2).times(17));
+        setDecString(new BigNumber(input.padEnd(1802, 0), 2).times(17));
         setBitMap();
+        setPresetUrl();
     } 
 });
 
@@ -139,9 +141,10 @@ $('#decArea').keyup(function() {
     else if (input != "") {
         bigInput = new BigNumber(input);
         decError.text("");
-        setBitString(bigInput.dividedBy(17).floor().toString(2).padStart(1802, 0));
+        setBitString(bigInput.dividedBy(17).integerValue(BigNumber.ROUND_FLOOR).toString(2).padStart(1802, 0));
         setDecString(bigInput);
         setBitMap();
+        setPresetUrl();
     }
 });
 
@@ -169,8 +172,9 @@ $("#presets button").click(function() {
     setDecString(big);
 
     // decimal = big;
-    setBitString("0".repeat(parseInt(b.attr('p'))) + big.dividedBy(17).floor().toString(2));
+    setBitString("0".repeat(parseInt(b.attr('p'))) + big.dividedBy(17).integerValue(BigNumber.ROUND_FLOOR).toString(2));
     setBitMap();
+    setPresetUrl();
 });
 
 
@@ -198,9 +202,45 @@ $("#presets #netpbm").change(function(evt) {
             setDecString(new BigNumber(bitString, 2).times(17));
 
             setBitMap();
+            setPresetUrl();
         } catch (ex) {
             alert(ex.message);
         }
     }
     reader.readAsBinaryString(input);
+});
+
+function loadBase62Preset(base62String) {
+    // Configure for digits + ASCII letters
+    BigNumber.config({ ALPHABET: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' });
+    try {
+        const big = new BigNumber(base62String, 62).integerValue();
+        decError.text("");
+        setDecString(big.times(17));
+        const bitString = big.toString(2);
+        setBitString(bitString.padStart(1802, '0'));
+        setBitMap();
+    } catch (error) { }
+}
+
+function setPresetUrl() {
+    const url = new URL(document.location);
+    const params = url.searchParams;
+    BigNumber.config({ ALPHABET: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' });
+    const base62String = decimal.dividedBy(17).toString(62);
+    if (base62String !== '0') {
+        params.set('preset', base62String);
+    } else {
+        params.delete('preset');
+    }
+    window.history.replaceState({}, document.title, url.href);
+}
+
+// Shorthand for $( document ).ready()
+$(function () {
+    const searchParams = new URLSearchParams(window.location.search);
+    const base62 = searchParams.get('preset');
+    if (base62 !== null) {
+        loadBase62Preset(base62);
+    }
 });
